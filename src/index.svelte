@@ -128,7 +128,7 @@
   let editHistory = null;
 
   export let rows = []; // Rows to display
-  export let columns = []; // Array of column definitions: { display: '', dataName: ''}, where display is what the display value is and dataName is what the key on the row object is
+  export let columns = []; // Array of column definitions: { display: '', dataName: '', hidden: false }, where display is what the display value is, dataName is what the key on the row object is, and hidden is an optional boolean that determines if the column should be shown or not (defaults to false)
   export let rowHeight = 24; // Row height in pixels
   export let allowResizeFromTableCells = false; // Allow the user to click on table cell borders to resize columns
   export let allowResizeFromTableHeaders = true; // Allow the user to clikc on table header borders to resize columns
@@ -648,6 +648,16 @@
   }
 
   /**
+   * Array of hidden columns
+  */
+  let hiddenColumns = columns.map(col => col.width || false); //TODO setter probably not needed due to reactive statement
+
+  $: {
+    // if hidden was not provided for the column, default it to false
+    hiddenColumns = columns.map(col => col.hidden || false);
+  }
+
+  /**
    * The number of rows we have
    */
   let numRows = rows.length; //TODO setter probably not needed due to reactive statement
@@ -664,7 +674,7 @@
   $: {
     let sum = 0;
     for (let i = 0; i < columnWidths.length; i++) {
-      sum += columnWidths[i];
+      if (!hiddenColumns[i]) { sum += columnWidths[i]; }
     }
 
     /**
@@ -913,33 +923,35 @@
       style="left: -{__scrollLeft}px; height: {rowHeight}px; width: {gridSpaceWidth}px;"
       role="row">
       {#each columns as column, i (i)}
-        <!-- svelte-ignore a11y-interactive-supports-focus -->
-        <div
-          class="grid-cell"
-          on:mousedown={event => onColumnDragStart(event, i)}
-          style="z-index: {getCellZIndex(__affixedColumnIndices, i)}; left: {getCellLeft(
-            { i, columnWidths, __affixedColumnIndices, __scrollLeft }
-          )}px; width: {columnWidths[i]}px; height: {rowHeight}px; line-height: {rowHeight}px;"
-          title={column.display || ''}
-          use:dragCopy={allowColumnReordering}
-          role="columnheader">
-          {#if column.headerComponent}
-            <svelte:component this={column.headerComponent} {column} />
-          {:else}
-            <div class="cell-default">{column.display || ''}</div>
-          {/if}
-        </div>
-        {#if allowResizeFromTableHeaders && !column.disallowResize}
+        {#if !hiddenColumns[i]}
+          <!-- svelte-ignore a11y-interactive-supports-focus -->
           <div
-            class="grid-cell-size-capture"
-            style="left: {getCellLeft({
-              i: i,
-              columnWidths,
-              __affixedColumnIndices,
-              __scrollLeft
-            }) + columnWidths[i] - Math.floor(__columnHeaderResizeCaptureWidth / 2)}px;
-            width: {__columnHeaderResizeCaptureWidth}px;"
-            on:mousedown={event => onColumnResizeStart(event, i)} />
+            class="grid-cell"
+            on:mousedown={event => onColumnDragStart(event, i)}
+            style="z-index: {getCellZIndex(__affixedColumnIndices, i)}; left: {getCellLeft(
+              { i, columnWidths, __affixedColumnIndices, __scrollLeft }
+            )}px; width: {columnWidths[i]}px; height: {rowHeight}px; line-height: {rowHeight}px;"
+            title={column.display || ''}
+            use:dragCopy={allowColumnReordering}
+            role="columnheader">
+            {#if column.headerComponent}
+              <svelte:component this={column.headerComponent} {column} />
+            {:else}
+              <div class="cell-default">{column.display || ''}</div>
+            {/if}
+          </div>
+          {#if allowResizeFromTableHeaders && !column.disallowResize}
+            <div
+              class="grid-cell-size-capture"
+              style="left: {getCellLeft({
+                i: i,
+                columnWidths,
+                __affixedColumnIndices,
+                __scrollLeft
+              }) + columnWidths[i] - Math.floor(__columnHeaderResizeCaptureWidth / 2)}px;
+              width: {__columnHeaderResizeCaptureWidth}px;"
+              on:mousedown={event => onColumnResizeStart(event, i)} />
+          {/if}
         {/if}
       {/each}
     </div>
@@ -995,23 +1007,25 @@
         role="row"
         aria-rowindex={row.i}>
         {#each columns as column, j}
-          <div
-            class="grid-cell"
-            style="z-index: {getCellZIndex(__affixedColumnIndices, j)}; left: {getCellLeft(
-              { i: j, columnWidths, __affixedColumnIndices, __scrollLeft }
-            )}px; height: {rowHeight}px; line-height: {rowHeight}px; width: {columnWidths[j]}px;"
-            role="cell">
-            {#if column.cellComponent}
-              <svelte:component
-                this={column.cellComponent}
-                rowNumber={row.i}
-                {column}
-                {row}
-                on:valueupdate={onCellUpdated} />
-            {:else}
-              <div class="cell-default">{row.data[column.dataName] || ''}</div>
-            {/if}
-          </div>
+          {#if !hiddenColumns[j]}
+            <div
+              class="grid-cell"
+              style="z-index: {getCellZIndex(__affixedColumnIndices, j)}; left: {getCellLeft(
+                { i: j, columnWidths, __affixedColumnIndices, __scrollLeft }
+              )}px; height: {rowHeight}px; line-height: {rowHeight}px; width: {columnWidths[j]}px;"
+              role="cell">
+              {#if column.cellComponent}
+                <svelte:component
+                  this={column.cellComponent}
+                  rowNumber={row.i}
+                  {column}
+                  {row}
+                  on:valueupdate={onCellUpdated} />
+              {:else}
+                <div class="cell-default">{row.data[column.dataName] || ''}</div>
+              {/if}
+            </div>
+          {/if}
         {/each}
       </div>
     {/each}
