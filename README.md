@@ -4,7 +4,7 @@
 ## [Demo](https://bsssshhhhhhh.github.io/svelte-data-grid-demo/)
 
 
-Svelte Data Grid is a svelte v3 component for displaying and editing any amount of data.
+Another Svelte Data Grid is a svelte v3 component for displaying and editing any amount of data. Please note that this is built on the fork of svelte-data-grid by bsssshhhhhhh.
 
 ## Features:
  - Excellent scrolling performance

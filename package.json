@@ -1,13 +1,13 @@
 {
-  "name": "svelte-data-grid",
-  "description": "High-performance svelte data table component for displaying huge datasets",
+  "name": "another-svelte-data-grid",
+  "description": "Another... Lightweight and powerful data grid for svelte. Built on the fork of svelte-data-grid by bsssshhhhhhh.",
   "version": "3.0.1",
   "author": {
-    "name": "Brian Simon",
-    "email": "bsssshhhhhhh@gmail.com",
-    "url": "https://github.com/bsssshhhhhhh"
+    "name": "Landon Miller",
+    "email": "millerlm012@gmail.com",
+    "url": "https://github.com/Millerlm012"
   },
-  "homepage": "https://github.com/bsssshhhhhhh/svelte-data-grid",
+  "homepage": "https://github.com/Millerlm012/another-svelte-data-grid",
   "svelte": "src/main.svelte",
   "module": "index.mjs",
   "main": "index.js",
@@ -30,7 +30,7 @@
     "table",
     "virtual-list"
   ],
-  "repository": "bsssshhhhhhh/svelte-data-grid",
+  "repository": "millerlm012/another-svelte-data-grid",
   "license": "MIT",
   "files": [
     "src",
