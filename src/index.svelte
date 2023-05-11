@@ -913,6 +913,7 @@
       style="left: -{__scrollLeft}px; height: {rowHeight}px; width: {gridSpaceWidth}px;"
       role="row">
       {#each columns as column, i (i)}
+        <!-- svelte-ignore a11y-interactive-supports-focus -->
         <div
           class="grid-cell"
           on:mousedown={event => onColumnDragStart(event, i)}
