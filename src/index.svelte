@@ -129,10 +129,10 @@
   let editHistory = null;
 
   export let rows = []; // Rows to display
-  export let columns = []; // Array of column definitions: { display: '', dataName: '', hidden: false, rowColorCase: { case: '', color: '' } }
+  export let columns = []; // Array of column definitions: { display: '', dataName: '', hidden: false, styleFunc: function() }
   // , where display is what the display value is, dataName is what the key on the row object is
   // , hidden is an optional boolean that determines if the column should be shown or not (defaults to false)
-  // , rowColorCase is an object that defaults to {}, but accepts a case condition that must be met and when that case is met the color will be applied to the entire row
+  // , styleFunc is a function that you can pass to style your rows based on content inside the column.
   export let rowHeight = 24; // Row height in pixels
   export let allowResizeFromTableCells = false; // Allow the user to click on table cell borders to resize columns
   export let allowResizeFromTableHeaders = true; // Allow the user to clikc on table header borders to resize columns
@@ -662,21 +662,12 @@
   }
 
   /**
-   * Array of rowColorCases for each column
+   * Array of styleFunc functions
   */
-  let rowColorCases = columns.map(col => {
-    col.rowColorCase ? col.rowColorCase.column = col.dataName : {};
-    return col.rowColorCase || {}
-  });
-  rowColorCases = rowColorCases.filter(obj => Object.keys(obj).length > 0);
+  let rowStyleFunctions = columns.map(col => col.styleFunc || false).filter(x => x);
 
   $: {
-    // if rowColorCase was not provided for the column, default to empty {}
-    rowColorCases = columns.map(col => {
-      col.rowColorCase ? col.rowColorCase.column = col.dataName : {};
-      return col.rowColorCase || {}
-    });
-    rowColorCases = rowColorCases.filter(obj => Object.keys(obj).length > 0);
+    rowStyleFunctions = columns.map(col => col.styleFunc || false).filter(x => x);
   }
 
   /**
@@ -1025,7 +1016,7 @@
       <div
         class="grid-row"
         style="top: {getRowTop(row.i, rowHeight)}px; height: {rowHeight}px;
-        width: {gridSpaceWidth}px; background-color: {style.rowColorCase(row, rowColorCases)};"
+        width: {gridSpaceWidth}px; background-color: {style.styleRow(row, rowStyleFunctions)};"
         role="row"
         aria-rowindex={row.i}>
         {#each columns as column, j}

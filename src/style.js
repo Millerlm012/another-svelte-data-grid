@@ -1,11 +1,8 @@
-export function rowColorCase(row, colorCases) {
+export function styleRow(row, styleFunctions) {
     let finalColor;
-    colorCases.forEach((colCase, i) => {
-        if (Object.keys(colCase).length > 0) {
-            if (row.data[colCase.column] == colCase.case) {
-                finalColor = colCase.color;
-            }
-        }
+    styleFunctions.forEach(func => {
+        finalColor = func(row);
     })
-    return finalColor;
+
+    return finalColor
 }
