@@ -3,6 +3,7 @@
   import EditHistory from "./edit-history";
   import { createEventDispatcher } from "svelte";
   import * as style from './style.js';
+  import * as help from './helper.js';
 
   const dispatch = createEventDispatcher();
 
@@ -10,6 +11,7 @@
 
   let wrapper;
   let tableSpace;
+  let selectedRows = [];
 
   /**
    * Computes the 'left' value for a grid-cell.
@@ -133,6 +135,7 @@
   // , where display is what the display value is, dataName is what the key on the row object is
   // , hidden is an optional boolean that determines if the column should be shown or not (defaults to false)
   // , styleFunc is a function that you can pass to style your rows based on content inside the column.
+  export let selectable = false; // boolean to determine if rows can be selected in table
   export let rowHeight = 24; // Row height in pixels
   export let allowResizeFromTableCells = false; // Allow the user to click on table cell borders to resize columns
   export let allowResizeFromTableHeaders = true; // Allow the user to clikc on table header borders to resize columns
@@ -742,6 +745,16 @@
   }
 
   /**
+   * Computes all rows with their data and index
+  */
+  let allRows = rows.map((row, i) => {
+    return {
+      i: i,
+      data: row
+    }
+  });
+
+  /**
    * Helpers
    */
   const getCellZIndex = function(__affixedColumnIndices, i) {
@@ -907,6 +920,10 @@
   .grid-cell:not(:last-child) {
     border-right: 1px solid #666;
   }
+
+  .selected {
+    background: rgb(1, 166, 255) !important;
+  }
 </style>
 
 <svelte:window
@@ -1013,8 +1030,12 @@
     <!-- Loop through the visible rows and display the data-->
     <!-- Scrolling seems to perform better when not using a keyed each block -->
     {#each visibleRows as row, i}
+      <!-- svelte-ignore a11y-interactive-supports-focus -->
+      <!-- svelte-ignore a11y-click-events-have-key-events -->
       <div
         class="grid-row"
+        on:click={(e) => { if (selectable) { selectedRows = help.selectRows(row, allRows, selectedRows, e) }}}
+        class:selected={help.checkSelectedRows(row, selectedRows)}
         style="top: {getRowTop(row.i, rowHeight)}px; height: {rowHeight}px;
         width: {gridSpaceWidth}px; background-color: {style.styleRow(row, rowStyleFunctions)};"
         role="row"
