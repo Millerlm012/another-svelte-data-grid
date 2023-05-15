@@ -1045,9 +1045,10 @@
                   { i: j, columnWidths, __affixedColumnIndices, __scrollLeft }
                 )}px; height: {rowHeight}px; line-height: {rowHeight}px; width: {columnWidths[j]}px;"
                 role="cell">
-                {#if column.cellComponent}
+                {#if column.customCell}
                   <svelte:component
-                    this={column.cellComponent}
+                    this={column.customCell.component}
+                    params={column.customCell.params}
                     rowNumber={row.i}
                     {column}
                     {row}
