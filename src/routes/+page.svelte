@@ -27,19 +27,19 @@
     let rows = [
         {
             fruitName: 'Apple',
-            fruitColor: 'Red'
+            fruitColor: null
         },
         {
             fruitName: 'Blueberry',
-            fruitColor: 'Blue'
+            fruitColor: 0
         },
         {
             fruitName: 'Tomato',
-            fruitColor: 'Red'
+            fruitColor: '0'
         },
         {
             fruitName: 'Apple',
-            fruitColor: 'Red'
+            fruitColor: ''
         },
         {
             fruitName: 'Blueberry',

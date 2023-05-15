@@ -1054,7 +1054,7 @@
                     {row}
                     on:valueupdate={onCellUpdated} />
                 {:else}
-                  <div class="cell-default">{row.data[column.dataName]}</div>
+                  <div class="cell-default">{row.data[column.dataName] !== null ? row.data[column.dataName] : ''}</div>
                 {/if}
               </div>
             {/if}
