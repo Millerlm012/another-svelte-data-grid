@@ -136,6 +136,8 @@
   // , hidden is an optional boolean that determines if the column should be shown or not (defaults to false)
   // , styleFunc is a function that you can pass to style your rows based on content inside the column.
   export let selectable = false; // boolean to determine if rows can be selected in table
+  export let selectedColor = 'rgb(1, 166, 255)'; // string for the background-color for the selected row with default as rgb(1, 166, 255)
+  export let selectedTextColor = 'black'; // string for the text color for the selected row with default as "black"
   export let rowHeight = 24; // Row height in pixels
   export let allowResizeFromTableCells = false; // Allow the user to click on table cell borders to resize columns
   export let allowResizeFromTableHeaders = true; // Allow the user to clikc on table header borders to resize columns
@@ -1035,9 +1037,8 @@
       <div
         class="grid-row"
         on:click={(e) => { if (selectable) { selectedRows = help.selectRows(row, allRows, selectedRows, e) }}}
-        class:selected={help.checkSelectedRows(row, selectedRows)}
         style="top: {getRowTop(row.i, rowHeight)}px; height: {rowHeight}px;
-        width: {gridSpaceWidth}px; background-color: {style.styleRow(row, rowStyleFunctions)};"
+        width: {gridSpaceWidth}px; {style.styleRowBackground(row, rowStyleFunctions, selectedColor, selectedTextColor, selectedRows)}"
         role="row"
         aria-rowindex={row.i}>
         {#each columns as column, j}
