@@ -21,12 +21,12 @@ Another Svelte Data Grid is a svelte v3 component for displaying and editing any
 
 If using within Sapper:
 ```
-npm install svelte-data-grid --save-dev
+npm install another-svelte-data-grid --save-dev
 ```
 
 If using from inside a svelte component:
 ```
-import DataGrid from "svelte-data-grid";
+import { DataGrid } from "another-svelte-data-grid";
 <DataGrid rows={myRows} allowColumnReordering={false} columns={myColumnDefinitions} on:columnOrderUpdated={saveNewColumnOrder}>
 ```
 
@@ -97,9 +97,9 @@ Version 2 added early support for editing data. Due to the lack of using a keyed
 
 Import the components:
 ```
-import TextboxCell from 'svelte-data-grid/src/textbox-cell.svelte';
-import SelectCell from 'svelte-data-grid/src/select-cell.svelte';
-import CheckboxCell from 'svelte-data-grid/src/checkbox-cell.svelte';
+import { TextboxCell } from 'another-svelte-data-grid';
+import { SelectCell } from 'another-svelte-data-grid';
+import { CheckboxCell } from 'another-svelte-data-grid';
 ```
 
 ### Textbox Cell

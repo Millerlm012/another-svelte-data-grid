@@ -3,4 +3,5 @@ node_modules
 yarn.lock
 package-lock.json
 index.mjs
-index.js
+.svelte-kit
+dist
