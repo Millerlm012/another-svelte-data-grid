@@ -11,7 +11,6 @@
 
   let wrapper;
   let tableSpace;
-  let selectedRows = [];
 
   /**
    * Computes the 'left' value for a grid-cell.
@@ -138,6 +137,7 @@
   export let selectable = false; // boolean to determine if rows can be selected in table
   export let selectedColor = 'rgb(1, 166, 255)'; // string for the background-color for the selected row with default as rgb(1, 166, 255)
   export let selectedTextColor = 'black'; // string for the text color for the selected row with default as "black"
+  export let selectedRows = [];
   export let rowHeight = 24; // Row height in pixels
   export let allowResizeFromTableCells = false; // Allow the user to click on table cell borders to resize columns
   export let allowResizeFromTableHeaders = true; // Allow the user to clikc on table header borders to resize columns
