@@ -922,10 +922,6 @@
   .grid-cell:not(:last-child) {
     border-right: 1px solid #666;
   }
-
-  .selected {
-    background: rgb(1, 166, 255) !important;
-  }
 </style>
 
 <svelte:window
