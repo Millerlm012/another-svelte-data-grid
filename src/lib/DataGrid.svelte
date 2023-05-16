@@ -749,12 +749,21 @@
     /**
      * Computes all rows with their data and index
     */
-    let allRows = rows.map((row, i) => {
+    let allRows = rows.map((row, i) => { //TODO setter probably not needed due to reactive statement
       return {
         i: i,
         data: row
       }
     });
+
+    $: {
+      allRows = rows.map((row, i) => {
+        return {
+          i: i,
+          data: row
+        }
+    });
+    }
   
     /**
      * Helpers
