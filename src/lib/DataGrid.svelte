@@ -692,7 +692,7 @@
     $: {
       let sum = 0;
       for (let i = 0; i < columnWidths.length; i++) {
-        if (!hiddenColumns[i]) { sum += columnWidths[i]; }
+        sum += columnWidths[i];
       }
   
       /**
