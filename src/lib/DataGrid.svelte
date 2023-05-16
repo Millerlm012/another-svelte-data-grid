@@ -928,7 +928,7 @@
       width: 100%;
     }
   
-    .grid-cell:not(:last-child) {
+    .grid-cell {
       border-right: 1px solid #666;
     }
   </style>
