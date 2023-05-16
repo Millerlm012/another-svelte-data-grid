@@ -143,6 +143,7 @@
     export let allowResizeFromTableHeaders = true; // Allow the user to clikc on table header borders to resize columns
     export let allowColumnReordering = true; // Allow the user to drag column headers to reorder columns
     export let allowColumnAffix = true; // Alow the user to affix columns to the left of the grid
+    export let allowColumnSort = false; // Allow the user to sort the column by clicking the column header (each click will change the order from asc to desc (alphabetically, numerically, and by Date/Time))
   
     export let __extraRows = 0; // Number of extra rows to render beyond what is visible in the scrollable area
     export let __columnHeaderResizeCaptureWidth = 20; // The width of the area on column borders that can be clicked to resize the column
@@ -778,6 +779,30 @@
     const getRowTop = function(i, rowHeight) {
       return i * rowHeight;
     };
+
+    /**
+     * Handles ordering the column via clicking column header
+    */
+    let orderAscending = false;
+    function orderColumn (col) {
+      selectedRows = [];
+      if (orderAscending) {
+          orderAscending = false;
+      } else {
+          orderAscending = true;
+      }
+
+      let columnType = help.checkType(rows[0][col.dataName]);
+      if (columnType == 'number') {
+        rows = help.orderByNumber(rows, col.dataName, orderAscending);
+      } else if (columnType == 'date') {
+        rows = help.orderByDate(rows, col.dataName, orderAscending);
+      } else if (columnType == 'string') {
+        rows = help.orderByString(rows, col.dataName, orderAscending);
+      }
+
+      rows = rows;
+    }
   
     // const getCellLeft =getCellLeft
   </script>
@@ -962,8 +987,10 @@
         {#each columns as column, i (i)}
           {#if !hiddenColumns[i]}
             <!-- svelte-ignore a11y-interactive-supports-focus -->
+            <!-- svelte-ignore a11y-click-events-have-key-events -->
             <div
               class="grid-cell"
+              on:click={ allowColumnSort ? orderColumn(column) : null }
               on:mousedown={event => onColumnDragStart(event, i)}
               style="z-index: {getCellZIndex(__affixedColumnIndices, i)}; left: {getCellLeft(
                 { i, columnWidths, __affixedColumnIndices, __scrollLeft }
