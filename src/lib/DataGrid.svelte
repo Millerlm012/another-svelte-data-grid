@@ -968,13 +968,13 @@
               style="z-index: {getCellZIndex(__affixedColumnIndices, i)}; left: {getCellLeft(
                 { i, columnWidths, __affixedColumnIndices, __scrollLeft }
               )}px; width: {columnWidths[i]}px; height: {rowHeight}px; line-height: {rowHeight}px;"
-              title={column.display || ''}
+              title={column.display || column.dataName}
               use:dragCopy={allowColumnReordering}
               role="columnheader">
               {#if column.headerComponent}
                 <svelte:component this={column.headerComponent} {column} />
               {:else}
-                <div class="cell-default">{column.display || ''}</div>
+                <div class="cell-default">{column.display || column.dataName}</div>
               {/if}
             </div>
             {#if allowResizeFromTableHeaders && !column.disallowResize}
