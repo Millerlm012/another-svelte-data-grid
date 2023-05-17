@@ -1,10 +1,13 @@
 export function checkType(val) {
-    let floatVal = parseFloat(val);
-    let dateVal = Date.parse(val);
-    if (dateVal) {
-        return 'date'
-    } else if (floatVal) {
+    const numberReg = /^\d+$/;
+    const floatReg = /^[0-9.]*$/;
+
+    if (numberReg.test(val) || floatReg.test(val)) {
         return 'number'
+    } else if (typeof val === 'boolean') {
+        return 'boolean'
+    } else if (Date.parse(val)) {
+        return 'date'
     }
 
     return 'string'
@@ -47,9 +50,9 @@ export function orderByString(rows, colName, asc) {
 export function orderByNumber(rows, colName, asc) {
     rows.sort((a, b) => {
         if (asc) {
-            return a[colName] - b[colName]
+            return (a[colName]===null)-(b[colName]===null) || a[colName] - b[colName]
         }
-        return b[colName] - a[colName]
+        return (a[colName]===null)-(b[colName]===null) || b[colName] - a[colName]
     })
 
     return rows
@@ -58,9 +61,9 @@ export function orderByNumber(rows, colName, asc) {
 export function orderByDate(rows, colName, asc) {
     rows.sort((a, b) => {
         if (asc) {
-            return new Date(a[colName]) - new Date(b[colName]);
+            return (a[colName]===null)-(b[colName]===null) || new Date(a[colName]) - new Date(b[colName]);
         }
-        return new Date(b[colName]) - new Date(a[colName]);
+        return (a[colName]===null)-(b[colName]===null) || new Date(b[colName]) - new Date(a[colName]);
     })
 
     return rows

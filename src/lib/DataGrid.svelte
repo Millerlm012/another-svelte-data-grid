@@ -792,16 +792,30 @@
           orderAscending = true;
       }
 
-      let columnType = help.checkType(rows[0][col.dataName]);
-      if (columnType == 'number') {
-        rows = help.orderByNumber(rows, col.dataName, orderAscending);
-      } else if (columnType == 'date') {
-        rows = help.orderByDate(rows, col.dataName, orderAscending);
-      } else if (columnType == 'string') {
-        rows = help.orderByString(rows, col.dataName, orderAscending);
+      let valueToCheck = null;
+      for (let i=0; i<rows.length; i++) {
+        if (rows[i][col.dataName] !== null) {
+          valueToCheck = rows[i];
+          console.log('non null value');
+          console.log(rows[i]);
+          break
+        }
       }
 
-      rows = rows;
+      // if column contains at least 1 non null value, we can sort it
+      if (valueToCheck) {
+        let columnType = help.checkType(valueToCheck[col.dataName]);
+        if (columnType == 'number' || columnType == 'boolean') {
+          // we can order bools the same was as number as the JavaScript engine will detect the bools and treat them as 0 and 1
+          rows = help.orderByNumber(rows, col.dataName, orderAscending);
+        } else if (columnType == 'date') {
+          rows = help.orderByDate(rows, col.dataName, orderAscending);
+        } else if (columnType == 'string') {
+          rows = help.orderByString(rows, col.dataName, orderAscending);
+        }
+
+        rows = rows;
+      }
     }
   
     // const getCellLeft =getCellLeft
