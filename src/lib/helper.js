@@ -71,11 +71,17 @@ export function orderByDate(rows, colName, asc) {
 
 export function selectRows(row, rows, selectedRows, e) {
     if (e.ctrlKey) {
-        if (!selectedRows.includes(row)) {
-            selectedRows.push(row);
-        } else {
-            let i = selectedRows.indexOf(row);
+        if (checkSelectedRows(row, selectedRows)) {
+            let i;
+            for (let x=0; x<selectedRows.length; x++) {
+                if (selectedRows[x].i == row.i) {
+                    i = x;
+                    break
+                }
+            }
             selectedRows.splice(i, 1);
+        } else {
+            selectedRows.push(row);
         }
     } else if (e.shiftKey) {
         if (selectedRows.length > 0) {
