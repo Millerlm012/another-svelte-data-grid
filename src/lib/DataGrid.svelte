@@ -1,6 +1,7 @@
 <script>
     import { onMount, afterUpdate } from "svelte";
     import EditHistory from "./edit-history";
+    import ContextMenu from './ContextMenu.svelte';
     import { createEventDispatcher } from "svelte";
     import * as style from './style.js';
     import * as help from './helper.js';
@@ -796,8 +797,6 @@
       for (let i=0; i<rows.length; i++) {
         if (rows[i][col.dataName] !== null) {
           valueToCheck = rows[i];
-          console.log('non null value');
-          console.log(rows[i]);
           break
         }
       }
@@ -816,6 +815,33 @@
 
         rows = rows;
       }
+    }
+
+    /**
+     * Handle on click events for when user clicks anywhere in the datagrid
+    */
+    let contextMenu = false;
+    let context = {};
+    function handleClick(row, column, e) {
+      if (e.type == 'click') {
+        context = {};
+        if (contextMenu) {
+          contextMenu = false;
+        }
+
+        if (selectable) {
+          selectedRows = help.selectRows(row, allRows, selectedRows, e);
+        }
+
+        return
+      }
+
+      contextMenu ? contextMenu = false : contextMenu = true;
+      context.column = column;
+      context.row = row;
+      context.x = e.x;
+      context.y = e.y;
+      context.menu = contextMenu;
     }
   
     // const getCellLeft =getCellLeft
@@ -883,6 +909,7 @@
       position: relative;
       width: 100%;
       height: 100%;
+      user-select: none;
     }
   
     .column-action-line {
@@ -977,10 +1004,15 @@
     on:mousemove={onMouseMove}
     on:keydown={onWindowKeyDown} />
   <div
+    on:contextmenu|preventDefault
     class="data-grid-wrapper {__resizing || __columnDragging ? 'resizing' : ''}"
     style="padding-top: {rowHeight}px;"
     bind:this={wrapper}
     role="table">
+    {#if contextMenu}
+      <ContextMenu context={context} rows={allRows} columns={columns} selectedRows={selectedRows} bind:menu={contextMenu} />
+    {/if}
+
     {#if __resizing || __columnDragging || __affixingColumn}
       <div
         class="column-action-line"
@@ -1082,7 +1114,7 @@
         <!-- svelte-ignore a11y-click-events-have-key-events -->
         <div
           class="grid-row"
-          on:click={(e) => { if (selectable) { selectedRows = help.selectRows(row, allRows, selectedRows, e) }}}
+          on:click={(e) => handleClick(row, null, e)}
           style="top: {getRowTop(row.i, rowHeight)}px; height: {rowHeight}px;
           width: {gridSpaceWidth}px; {style.styleRowBackground(row, rowStyleFunctions, selectedColor, selectedTextColor, selectedRows)}"
           role="row"
@@ -1090,6 +1122,7 @@
           {#each columns as column, j}
             {#if !hiddenColumns[j]}
               <div
+                on:contextmenu={(e) => handleClick(row, column, e)}
                 class="grid-cell"
                 style="z-index: {getCellZIndex(__affixedColumnIndices, j)}; left: {getCellLeft(
                   { i: j, columnWidths, __affixedColumnIndices, __scrollLeft }
