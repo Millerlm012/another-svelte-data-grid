@@ -1,175 +1,175 @@
 <script>
-    import DataGrid from '$lib/DataGrid.svelte';
-    // import Wrapper from '$lib/Wrapper.svelte';
+  import DataGrid from "$lib/DataGrid.svelte";
 
-    function styleRows(row) {
-        switch(row.data.fruitColor) {
-            case 'Red':
-                return 'red';
-            case 'Blue':
-                return 'blue';
-        }
-    }
-
-    let columns = [
-        {
-            display: 'Fruit Name',
-            dataName: 'fruitName',
-            width: 300
-        },
-        {
-            display: 'Color',
-            dataName: 'fruitColor',
-            width: 600,
-            styleFunc: styleRows
-        }
-    ];
-    let rows = [
-        {
-            fruitName: 'Apple',
-            fruitColor: null
-        },
-        {
-            fruitName: 'Blueberry',
-            fruitColor: 0
-        },
-        {
-            fruitName: 'Tomato',
-            fruitColor: '0'
-        },
-        {
-            fruitName: 'Apple',
-            fruitColor: ''
-        },
-        {
-            fruitName: 'Blueberry',
-            fruitColor: 'Blue'
-        },
-        {
-            fruitName: 'Tomato',
-            fruitColor: 'Red'
-        },{
-            fruitName: 'Apple',
-            fruitColor: 'Red'
-        },
-        {
-            fruitName: 'Blueberry',
-            fruitColor: 'Blue'
-        },
-        {
-            fruitName: 'Tomato',
-            fruitColor: 'Red'
-        },{
-            fruitName: 'Apple',
-            fruitColor: 'Red'
-        },
-        {
-            fruitName: 'Blueberry',
-            fruitColor: 'Blue'
-        },
-        {
-            fruitName: 'Tomato',
-            fruitColor: 'Red'
-        },{
-            fruitName: 'Apple',
-            fruitColor: 'Red'
-        },
-        {
-            fruitName: 'Blueberry',
-            fruitColor: 'Blue'
-        },
-        {
-            fruitName: 'Tomato',
-            fruitColor: 'Red'
-        },{
-            fruitName: 'Apple',
-            fruitColor: 'Red'
-        },
-        {
-            fruitName: 'Blueberry',
-            fruitColor: 'Blue'
-        },
-        {
-            fruitName: 'Tomato',
-            fruitColor: 'Red'
-        },{
-            fruitName: 'Apple',
-            fruitColor: 'Red'
-        },
-        {
-            fruitName: 'Blueberry',
-            fruitColor: 'Blue'
-        },
-        {
-            fruitName: 'Tomato',
-            fruitColor: 'Red'
-        },{
-            fruitName: 'Apple',
-            fruitColor: 'Red'
-        },
-        {
-            fruitName: 'Blueberry',
-            fruitColor: 'Blue'
-        },
-        {
-            fruitName: 'Tomato',
-            fruitColor: 'Red'
-        },{
-            fruitName: 'Apple',
-            fruitColor: 'Red'
-        },
-        {
-            fruitName: 'Blueberry',
-            fruitColor: 'Blue'
-        },
-        {
-            fruitName: 'Tomato',
-            fruitColor: 'Red'
-        },{
-            fruitName: 'Apple',
-            fruitColor: 'Red'
-        },
-        {
-            fruitName: 'Blueberry',
-            fruitColor: 'Blue'
-        },
-        {
-            fruitName: 'Tomato',
-            fruitColor: 'Red'
-        },{
-            fruitName: 'Apple',
-            fruitColor: 'Red'
-        },
-        {
-            fruitName: 'Blueberry',
-            fruitColor: 'Blue'
-        },
-        {
-            fruitName: 'Tomato',
-            fruitColor: 'Red'
-        }
-    ];
+  let columns = [
+    {
+      display: "Adult",
+      dataName: "adult",
+    },
+    {
+      display: "Collection",
+      dataName: "belongs_to_collection",
+    },
+    {
+      display: "Budget",
+      dataName: "budget",
+    },
+  ];
+  let rows = [
+    {
+      fruitName: "Apple",
+      fruitColor: null,
+    },
+    {
+      fruitName: "Blueberry",
+      fruitColor: 0,
+    },
+    {
+      fruitName: "Tomato",
+      fruitColor: "0",
+    },
+    {
+      fruitName: "Apple",
+      fruitColor: "",
+    },
+    {
+      fruitName: "Blueberry",
+      fruitColor: "Blue",
+    },
+    {
+      fruitName: "Tomato",
+      fruitColor: "Red",
+    },
+    {
+      fruitName: "Apple",
+      fruitColor: "Red",
+    },
+    {
+      fruitName: "Blueberry",
+      fruitColor: "Blue",
+    },
+    {
+      fruitName: "Tomato",
+      fruitColor: "Red",
+    },
+    {
+      fruitName: "Apple",
+      fruitColor: "Red",
+    },
+    {
+      fruitName: "Blueberry",
+      fruitColor: "Blue",
+    },
+    {
+      fruitName: "Tomato",
+      fruitColor: "Red",
+    },
+    {
+      fruitName: "Apple",
+      fruitColor: "Red",
+    },
+    {
+      fruitName: "Blueberry",
+      fruitColor: "Blue",
+    },
+    {
+      fruitName: "Tomato",
+      fruitColor: "Red",
+    },
+    {
+      fruitName: "Apple",
+      fruitColor: "Red",
+    },
+    {
+      fruitName: "Blueberry",
+      fruitColor: "Blue",
+    },
+    {
+      fruitName: "Tomato",
+      fruitColor: "Red",
+    },
+    {
+      fruitName: "Apple",
+      fruitColor: "Red",
+    },
+    {
+      fruitName: "Blueberry",
+      fruitColor: "Blue",
+    },
+    {
+      fruitName: "Tomato",
+      fruitColor: "Red",
+    },
+    {
+      fruitName: "Apple",
+      fruitColor: "Red",
+    },
+    {
+      fruitName: "Blueberry",
+      fruitColor: "Blue",
+    },
+    {
+      fruitName: "Tomato",
+      fruitColor: "Red",
+    },
+    {
+      fruitName: "Apple",
+      fruitColor: "Red",
+    },
+    {
+      fruitName: "Blueberry",
+      fruitColor: "Blue",
+    },
+    {
+      fruitName: "Tomato",
+      fruitColor: "Red",
+    },
+    {
+      fruitName: "Apple",
+      fruitColor: "Red",
+    },
+    {
+      fruitName: "Blueberry",
+      fruitColor: "Blue",
+    },
+    {
+      fruitName: "Tomato",
+      fruitColor: "Red",
+    },
+    {
+      fruitName: "Apple",
+      fruitColor: "Red",
+    },
+    {
+      fruitName: "Blueberry",
+      fruitColor: "Blue",
+    },
+    {
+      fruitName: "Tomato",
+      fruitColor: "Red",
+    },
+  ];
 </script>
 
-<style>
-    .page {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        height: 100vh;
-        background-color: grey;
-    }
-
-    .grid {
-        width: 80%;
-        height: 80%;
-    }
-</style>
-
 <div class="page">
-    <div class="grid">
-        <DataGrid rows={rows} columns={columns} selectable={true} />
-    </div>
+  <div class="grid">
+    <DataGrid {rows} {columns} selectable={true} />
+  </div>
 </div>
+
+<style>
+  .page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+    background-color: grey;
+  }
+
+  .grid {
+    width: 80%;
+    height: 80%;
+  }
+</style>

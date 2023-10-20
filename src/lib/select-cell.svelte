@@ -20,11 +20,26 @@
         row,
         column,
         value: select.value,
-        rowNumber
+        rowNumber,
       });
     }, 0);
   }
 </script>
+
+<div class="select-cell">
+  {#if column.options instanceof Array}
+    <select on:change={onChange} bind:this={select}>
+      {#each column.options as option}
+        <option
+          value={option.value}
+          selected={option.value === row.data[column.dataName]}
+        >
+          {getOptionDisplay(option.display)}
+        </option>
+      {/each}
+    </select>
+  {/if}
+</div>
 
 <style>
   .select-cell {
@@ -41,17 +56,3 @@
     padding: 0 5px;
   }
 </style>
-
-<div class="select-cell">
-  {#if column.options instanceof Array}
-    <select on:change={onChange} bind:this={select}>
-      {#each column.options as option}
-        <option
-          value={option.value}
-          selected={option.value === row.data[column.dataName]}>
-          {getOptionDisplay(option.display)}
-        </option>
-      {/each}
-    </select>
-  {/if}
-</div>

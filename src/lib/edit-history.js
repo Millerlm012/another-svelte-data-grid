@@ -1,4 +1,4 @@
-import DeepDiff from  'deep-diff';
+import DeepDiff from "deep-diff";
 const applyChange = DeepDiff.applyChange;
 const diff = DeepDiff.diff;
 /**
@@ -32,7 +32,7 @@ export default class EditHistory {
   recordChange(newObj) {
     const patch = {
       redo: diff(this.obj, newObj),
-      undo: diff(newObj, this.obj)
+      undo: diff(newObj, this.obj),
     };
 
     if (!patch.redo || !patch.undo) {
@@ -56,7 +56,7 @@ export default class EditHistory {
     const patch = this.backward.pop();
 
     // applyChange doesn't accept arrays, only its members
-    patch.undo.forEach(x => applyChange(this.obj, x));
+    patch.undo.forEach((x) => applyChange(this.obj, x));
 
     // put the patch into the forward queue
     this.forward.push(patch);
@@ -77,7 +77,7 @@ export default class EditHistory {
     const patch = this.forward.pop();
 
     // applyChange doesn't accept arrays, only its members
-    patch.redo.forEach(x => applyChange(this.obj, x));
+    patch.redo.forEach((x) => applyChange(this.obj, x));
 
     // put the patch into the backward queue
     this.backward.push(patch);
