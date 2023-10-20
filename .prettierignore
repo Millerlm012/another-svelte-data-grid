@@ -1,0 +1,4 @@
+.svelte-kit/
+.vscode/
+node_modules/
+example_data/

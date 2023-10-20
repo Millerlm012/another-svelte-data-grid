@@ -1,5 +1,6 @@
 <script>
   import DataGrid from "$lib/DataGrid.svelte";
+  import rows from "../example_data/movies_metadata.json";
 
   let columns = [
     {
@@ -14,144 +15,98 @@
       display: "Budget",
       dataName: "budget",
     },
-  ];
-  let rows = [
     {
-      fruitName: "Apple",
-      fruitColor: null,
+      display: "Genres",
+      dataName: "genres",
     },
     {
-      fruitName: "Blueberry",
-      fruitColor: 0,
+      display: "Homepage",
+      dataName: "homepage",
     },
     {
-      fruitName: "Tomato",
-      fruitColor: "0",
+      display: "ID",
+      dataName: "id",
     },
     {
-      fruitName: "Apple",
-      fruitColor: "",
+      display: "IMDB ID",
+      dataName: "imdb_id",
     },
     {
-      fruitName: "Blueberry",
-      fruitColor: "Blue",
+      display: "OG Language",
+      dataName: "original_language",
     },
     {
-      fruitName: "Tomato",
-      fruitColor: "Red",
+      display: "OG Title",
+      dataName: "original_title",
     },
     {
-      fruitName: "Apple",
-      fruitColor: "Red",
+      display: "Overview",
+      dataName: "overview",
     },
     {
-      fruitName: "Blueberry",
-      fruitColor: "Blue",
+      display: "Popularity",
+      dataName: "popularity",
     },
     {
-      fruitName: "Tomato",
-      fruitColor: "Red",
+      display: "Poster Path",
+      dataName: "poster_path",
     },
     {
-      fruitName: "Apple",
-      fruitColor: "Red",
+      display: "Production Companies",
+      dataName: "production_companies",
     },
     {
-      fruitName: "Blueberry",
-      fruitColor: "Blue",
+      display: "Production Countries",
+      dataName: "production_countries",
     },
     {
-      fruitName: "Tomato",
-      fruitColor: "Red",
+      display: "Release Date",
+      dataName: "release_date",
     },
     {
-      fruitName: "Apple",
-      fruitColor: "Red",
+      display: "Revenue",
+      dataName: "revenue",
     },
     {
-      fruitName: "Blueberry",
-      fruitColor: "Blue",
+      display: "Runtime",
+      dataName: "runtime",
     },
     {
-      fruitName: "Tomato",
-      fruitColor: "Red",
+      display: "Spoken Languages",
+      dataName: "spoken_languages",
     },
     {
-      fruitName: "Apple",
-      fruitColor: "Red",
+      display: "Status",
+      dataName: "status",
     },
     {
-      fruitName: "Blueberry",
-      fruitColor: "Blue",
+      display: "Tagline",
+      dataName: "tagline",
     },
     {
-      fruitName: "Tomato",
-      fruitColor: "Red",
+      display: "Title",
+      dataName: "title",
     },
     {
-      fruitName: "Apple",
-      fruitColor: "Red",
+      display: "Video",
+      dataName: "video",
     },
     {
-      fruitName: "Blueberry",
-      fruitColor: "Blue",
+      display: "Vote Avg.",
+      dataName: "vote_average",
     },
     {
-      fruitName: "Tomato",
-      fruitColor: "Red",
-    },
-    {
-      fruitName: "Apple",
-      fruitColor: "Red",
-    },
-    {
-      fruitName: "Blueberry",
-      fruitColor: "Blue",
-    },
-    {
-      fruitName: "Tomato",
-      fruitColor: "Red",
-    },
-    {
-      fruitName: "Apple",
-      fruitColor: "Red",
-    },
-    {
-      fruitName: "Blueberry",
-      fruitColor: "Blue",
-    },
-    {
-      fruitName: "Tomato",
-      fruitColor: "Red",
-    },
-    {
-      fruitName: "Apple",
-      fruitColor: "Red",
-    },
-    {
-      fruitName: "Blueberry",
-      fruitColor: "Blue",
-    },
-    {
-      fruitName: "Tomato",
-      fruitColor: "Red",
-    },
-    {
-      fruitName: "Apple",
-      fruitColor: "Red",
-    },
-    {
-      fruitName: "Blueberry",
-      fruitColor: "Blue",
-    },
-    {
-      fruitName: "Tomato",
-      fruitColor: "Red",
+      display: "Vote Count",
+      dataName: "vote_count",
     },
   ];
 </script>
 
 <div class="page">
+  <div class="header">
+    <h1>Data Grid Demo</h1>
+    <h4>45,572 rows</h4>
+  </div>
   <div class="grid">
     <DataGrid {rows} {columns} selectable={true} />
   </div>
@@ -159,17 +114,23 @@
 
 <style>
   .page {
+    padding: 50px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     width: 100%;
     height: 100vh;
-    background-color: grey;
+  }
+
+  .header {
+    text-align: center;
+    box-sizing: border-box;
+    padding-bottom: 10px;
   }
 
   .grid {
     width: 80%;
     height: 80%;
+    border: 1px solid black;
   }
 </style>
