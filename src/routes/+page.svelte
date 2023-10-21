@@ -10,6 +10,7 @@
     {
       display: "Collection",
       dataName: "belongs_to_collection",
+      hidden: true
     },
     {
       display: "Budget",
@@ -18,6 +19,7 @@
     {
       display: "Genres",
       dataName: "genres",
+      hidden: true
     },
     {
       display: "Homepage",
@@ -54,10 +56,12 @@
     {
       display: "Production Companies",
       dataName: "production_companies",
+      hidden: true
     },
     {
       display: "Production Countries",
       dataName: "production_countries",
+      hidden: true
     },
     {
       display: "Release Date",
@@ -74,6 +78,7 @@
     {
       display: "Spoken Languages",
       dataName: "spoken_languages",
+      hidden: true
     },
     {
       display: "Status",
