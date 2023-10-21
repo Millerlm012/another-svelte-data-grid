@@ -651,11 +651,11 @@
   /**
    * Array of column widths
    */
-  let columnWidths = columns.map((x) => x.width || MIN_COLUMN_SIZE); //TODO setter probably not needed due to reactive statement
+  let columnWidths = columns.map((x) => x.hidden ? 0 : x.width || MIN_COLUMN_SIZE); //TODO setter probably not needed due to reactive statement
 
   $: {
     // if width was not provided for this column, give it a default value
-    columnWidths = columns.map((x) => x.width || MIN_COLUMN_SIZE);
+    columnWidths = columns.map((x) => x.hidden ? 0 : x.width || MIN_COLUMN_SIZE);
   }
 
   /**
