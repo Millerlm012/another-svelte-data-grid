@@ -19,6 +19,38 @@
    * @param {Array} columnWidths The array of column widths in order
    * @returns {Number}
    */
+  function getColumnWidths(cols) {
+    let CHARACTER_SCALAR = 10;
+    let columnWidths = [];
+    cols.forEach((_) => { columnWidths.push(MIN_COLUMN_SIZE); })
+    let columnNames = Object.keys(rows[0]);
+    for (let i=0; i<rows.length; i++) {
+      columnNames.forEach((col, colI) => {
+        if (cols[colI].width) {
+          columnWidths[colI] = cols[colI].width;
+          return
+        }
+
+        if (rows[i][col] === null || rows[i][col] === undefined || rows[i][col] === "") {
+          return
+        }
+
+        if (rows[i][col].length * CHARACTER_SCALAR > columnWidths[i]) {
+          columnWidths[colI] = rows[i][col].length * CHARACTER_SCALAR;
+          return
+        }
+      })
+    }
+
+    return columnWidths;
+  }
+
+  /**
+   * Computes the 'left' value for a grid-cell.
+   * @param {Number} i The cell index
+   * @param {Array} columnWidths The array of column widths in order
+   * @returns {Number}
+   */
   function getCellLeft({
     i,
     columnWidths,
@@ -651,11 +683,15 @@
   /**
    * Array of column widths
    */
-  let columnWidths = columns.map((x) => x.hidden ? 0 : x.width || MIN_COLUMN_SIZE); //TODO setter probably not needed due to reactive statement
+  // let columnWidths = columns.map((x) => x.hidden ? 0 : x.width || MIN_COLUMN_SIZE); //TODO setter probably not needed due to reactive statement
 
+  // $: {
+  //   // if width was not provided for this column, give it a default value
+  //   columnWidths = columns.map((x) => x.hidden ? 0 : x.width || MIN_COLUMN_SIZE); console.log(columnWidths);
+  // }
+  let columnWidths = getColumnWidths(columns);
   $: {
-    // if width was not provided for this column, give it a default value
-    columnWidths = columns.map((x) => x.hidden ? 0 : x.width || MIN_COLUMN_SIZE);
+    columnWidths = getColumnWidths(columns);
   }
 
   /**

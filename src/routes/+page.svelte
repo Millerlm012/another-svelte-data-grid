@@ -8,18 +8,8 @@
       dataName: "adult",
     },
     {
-      display: "Collection",
-      dataName: "belongs_to_collection",
-      hidden: true
-    },
-    {
       display: "Budget",
       dataName: "budget",
-    },
-    {
-      display: "Genres",
-      dataName: "genres",
-      hidden: true
     },
     {
       display: "Homepage",
@@ -54,16 +44,6 @@
       dataName: "poster_path",
     },
     {
-      display: "Production Companies",
-      dataName: "production_companies",
-      hidden: true
-    },
-    {
-      display: "Production Countries",
-      dataName: "production_countries",
-      hidden: true
-    },
-    {
       display: "Release Date",
       dataName: "release_date",
     },
@@ -74,11 +54,6 @@
     {
       display: "Runtime",
       dataName: "runtime",
-    },
-    {
-      display: "Spoken Languages",
-      dataName: "spoken_languages",
-      hidden: true
     },
     {
       display: "Status",
