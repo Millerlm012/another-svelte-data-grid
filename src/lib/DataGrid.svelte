@@ -22,24 +22,32 @@
   function getColumnWidths(cols) {
     let CHARACTER_SCALAR = 10;
     let columnWidths = [];
-    cols.forEach((col) => { col.width ? columnWidths.push(col.width) : columnWidths.push(MIN_COLUMN_SIZE); })
+    cols.forEach((col) => {
+      col.width
+        ? columnWidths.push(col.width)
+        : columnWidths.push(MIN_COLUMN_SIZE);
+    });
     let columnNames = Object.keys(rows[0]);
-    for (let i=0; i<rows.length; i++) {
+    for (let i = 0; i < rows.length; i++) {
       columnNames.forEach((col, colI) => {
         if (cols[colI].width) {
           columnWidths[colI] = cols[colI].width;
-          return
+          return;
         }
 
-        if (rows[i][col] === null || rows[i][col] === undefined || rows[i][col] === "") {
-          return
+        if (
+          rows[i][col] === null ||
+          rows[i][col] === undefined ||
+          rows[i][col] === ""
+        ) {
+          return;
         }
 
         if (rows[i][col].length * CHARACTER_SCALAR > columnWidths[i]) {
           columnWidths[colI] = rows[i][col].length * CHARACTER_SCALAR;
-          return
+          return;
         }
-      })
+      });
     }
 
     return columnWidths;
