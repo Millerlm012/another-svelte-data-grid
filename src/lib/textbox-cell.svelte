@@ -60,11 +60,21 @@
         row,
         column,
         value,
-        rowNumber
+        rowNumber,
       });
     }, 0);
   }
 </script>
+
+<div class="textbox-cell">
+  <input
+    type="text"
+    on:input={onInput}
+    on:focus={onFocus}
+    on:blur={onBlur}
+    bind:this={textbox}
+  />
+</div>
 
 <style>
   .textbox-cell {
@@ -87,12 +97,3 @@
     border: 1px solid lime;
   }
 </style>
-
-<div class="textbox-cell">
-  <input
-    type="text"
-    on:input={onInput}
-    on:focus={onFocus}
-    on:blur={onBlur}
-    bind:this={textbox} />
-</div>

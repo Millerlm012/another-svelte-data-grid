@@ -14,11 +14,20 @@
         row,
         column,
         value: checkbox.checked,
-        rowNumber
+        rowNumber,
       });
     }, 0);
   }
 </script>
+
+<div class="checkbox-cell">
+  <input
+    type="checkbox"
+    bind:this={checkbox}
+    checked={row.data[column.dataName]}
+    on:click={onChange}
+  />
+</div>
 
 <style>
   .checkbox-cell {
@@ -26,11 +35,3 @@
     background: white;
   }
 </style>
-
-<div class="checkbox-cell">
-  <input
-    type="checkbox"
-    bind:this={checkbox}
-    checked={row.data[column.dataName]}
-    on:click={onChange} />
-</div>

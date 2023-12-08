@@ -1,175 +1,116 @@
 <script>
-    import DataGrid from '$lib/DataGrid.svelte';
-    // import Wrapper from '$lib/Wrapper.svelte';
+  import DataGrid from "$lib/DataGrid.svelte";
+  import rows from "../example_data/movies_metadata.json";
 
-    function styleRows(row) {
-        switch(row.data.fruitColor) {
-            case 'Red':
-                return 'red';
-            case 'Blue':
-                return 'blue';
-        }
-    }
-
-    let columns = [
-        {
-            display: 'Fruit Name',
-            dataName: 'fruitName',
-            width: 300
-        },
-        {
-            display: 'Color',
-            dataName: 'fruitColor',
-            width: 600,
-            styleFunc: styleRows
-        }
-    ];
-    let rows = [
-        {
-            fruitName: 'Apple',
-            fruitColor: null
-        },
-        {
-            fruitName: 'Blueberry',
-            fruitColor: 0
-        },
-        {
-            fruitName: 'Tomato',
-            fruitColor: '0'
-        },
-        {
-            fruitName: 'Apple',
-            fruitColor: ''
-        },
-        {
-            fruitName: 'Blueberry',
-            fruitColor: 'Blue'
-        },
-        {
-            fruitName: 'Tomato',
-            fruitColor: 'Red'
-        },{
-            fruitName: 'Apple',
-            fruitColor: 'Red'
-        },
-        {
-            fruitName: 'Blueberry',
-            fruitColor: 'Blue'
-        },
-        {
-            fruitName: 'Tomato',
-            fruitColor: 'Red'
-        },{
-            fruitName: 'Apple',
-            fruitColor: 'Red'
-        },
-        {
-            fruitName: 'Blueberry',
-            fruitColor: 'Blue'
-        },
-        {
-            fruitName: 'Tomato',
-            fruitColor: 'Red'
-        },{
-            fruitName: 'Apple',
-            fruitColor: 'Red'
-        },
-        {
-            fruitName: 'Blueberry',
-            fruitColor: 'Blue'
-        },
-        {
-            fruitName: 'Tomato',
-            fruitColor: 'Red'
-        },{
-            fruitName: 'Apple',
-            fruitColor: 'Red'
-        },
-        {
-            fruitName: 'Blueberry',
-            fruitColor: 'Blue'
-        },
-        {
-            fruitName: 'Tomato',
-            fruitColor: 'Red'
-        },{
-            fruitName: 'Apple',
-            fruitColor: 'Red'
-        },
-        {
-            fruitName: 'Blueberry',
-            fruitColor: 'Blue'
-        },
-        {
-            fruitName: 'Tomato',
-            fruitColor: 'Red'
-        },{
-            fruitName: 'Apple',
-            fruitColor: 'Red'
-        },
-        {
-            fruitName: 'Blueberry',
-            fruitColor: 'Blue'
-        },
-        {
-            fruitName: 'Tomato',
-            fruitColor: 'Red'
-        },{
-            fruitName: 'Apple',
-            fruitColor: 'Red'
-        },
-        {
-            fruitName: 'Blueberry',
-            fruitColor: 'Blue'
-        },
-        {
-            fruitName: 'Tomato',
-            fruitColor: 'Red'
-        },{
-            fruitName: 'Apple',
-            fruitColor: 'Red'
-        },
-        {
-            fruitName: 'Blueberry',
-            fruitColor: 'Blue'
-        },
-        {
-            fruitName: 'Tomato',
-            fruitColor: 'Red'
-        },{
-            fruitName: 'Apple',
-            fruitColor: 'Red'
-        },
-        {
-            fruitName: 'Blueberry',
-            fruitColor: 'Blue'
-        },
-        {
-            fruitName: 'Tomato',
-            fruitColor: 'Red'
-        }
-    ];
+  let columns = [
+    {
+      display: "Adult",
+      dataName: "adult",
+    },
+    {
+      display: "Budget",
+      dataName: "budget",
+    },
+    {
+      display: "Homepage",
+      dataName: "homepage",
+    },
+    {
+      display: "ID",
+      dataName: "id",
+    },
+    {
+      display: "IMDB ID",
+      dataName: "imdb_id",
+    },
+    {
+      display: "OG Language",
+      dataName: "original_language",
+    },
+    {
+      display: "OG Title",
+      dataName: "original_title",
+    },
+    {
+      display: "Overview",
+      dataName: "overview",
+    },
+    {
+      display: "Popularity",
+      dataName: "popularity",
+    },
+    {
+      display: "Poster Path",
+      dataName: "poster_path",
+    },
+    {
+      display: "Release Date",
+      dataName: "release_date",
+    },
+    {
+      display: "Revenue",
+      dataName: "revenue",
+    },
+    {
+      display: "Runtime",
+      dataName: "runtime",
+    },
+    {
+      display: "Status",
+      dataName: "status",
+    },
+    {
+      display: "Tagline",
+      dataName: "tagline",
+    },
+    {
+      display: "Title",
+      dataName: "title",
+    },
+    {
+      display: "Video",
+      dataName: "video",
+    },
+    {
+      display: "Vote Avg.",
+      dataName: "vote_average",
+    },
+    {
+      display: "Vote Count",
+      dataName: "vote_count",
+    },
+  ];
 </script>
 
-<style>
-    .page {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        width: 100%;
-        height: 100vh;
-        background-color: grey;
-    }
-
-    .grid {
-        width: 80%;
-        height: 80%;
-    }
-</style>
-
 <div class="page">
-    <div class="grid">
-        <DataGrid rows={rows} columns={columns} selectable={true} />
-    </div>
+  <div class="header">
+    <h1>Data Grid Demo</h1>
+    <h4>45,572 rows</h4>
+  </div>
+  <div class="grid">
+    <DataGrid {rows} {columns} selectable={true} />
+  </div>
 </div>
+
+<style>
+  .page {
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+  }
+
+  .header {
+    text-align: center;
+    box-sizing: border-box;
+    padding-bottom: 10px;
+  }
+
+  .grid {
+    width: 80%;
+    height: 80%;
+    border: 1px solid black;
+  }
+</style>
