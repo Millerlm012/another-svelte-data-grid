@@ -22,7 +22,7 @@
   function getColumnWidths(cols) {
     let CHARACTER_SCALAR = 10;
     let columnWidths = [];
-    cols.forEach((_) => { columnWidths.push(MIN_COLUMN_SIZE); })
+    cols.forEach((col) => { col.width ? columnWidths.push(col.width) : columnWidths.push(MIN_COLUMN_SIZE); })
     let columnNames = Object.keys(rows[0]);
     for (let i=0; i<rows.length; i++) {
       columnNames.forEach((col, colI) => {
